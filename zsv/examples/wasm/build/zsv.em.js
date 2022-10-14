@@ -4445,9 +4445,6 @@ var _zsv_cum_scanned_length = Module["_zsv_cum_scanned_length"] = createExportWr
 var _zsv_parse_bytes = Module["_zsv_parse_bytes"] = createExportWrapper("zsv_parse_bytes");
 
 /** @type {function(...*):?} */
-var _zsv_strencode = Module["_zsv_strencode"] = createExportWrapper("zsv_strencode");
-
-/** @type {function(...*):?} */
 var ___errno_location = Module["___errno_location"] = createExportWrapper("__errno_location");
 
 /** @type {function(...*):?} */

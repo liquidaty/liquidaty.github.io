@@ -1,4 +1,4 @@
-let zsv_parser = (function(){
+let zsvParser = (function(){
 
 
 // The Module object: Our interface to the outside world. We import
@@ -4446,9 +4446,6 @@ var _zsv_cum_scanned_length = Module["_zsv_cum_scanned_length"] = createExportWr
 var _zsv_parse_bytes = Module["_zsv_parse_bytes"] = createExportWrapper("zsv_parse_bytes");
 
 /** @type {function(...*):?} */
-var _zsv_strencode = Module["_zsv_strencode"] = createExportWrapper("zsv_strencode");
-
-/** @type {function(...*):?} */
 var ___errno_location = Module["___errno_location"] = createExportWrapper("__errno_location");
 
 /** @type {function(...*):?} */
@@ -5022,7 +5019,7 @@ run();
         return z;
       }
     },
-    parse_bytes: function(z, byte_array) {
+    parseBytes: function(z, byte_array) {
       let len = byte_array.length;
       if(len) {
         // copy bytes into a chunk of memory that our library can access
@@ -5032,19 +5029,15 @@ run();
           z.buff = _malloc(len);
           z.buffsize = len;
         }
+        // copy to memory that wasm can access, then parse
         writeArrayToMemory(byte_array, z.buff);
-
-        // ensure our input is valid UTF8
-        len = _zsv_strencode(z.buff, len, 0, 0, 0);
-
-        // parse
         return _zsv_parse_bytes(z.zsv, z.buff, len);
       }
     },
-    cell_count: function(z) {
+    cellCount: function(z) {
       return _zsv_cell_count(z.zsv);
     },
-    get_cell: function(z, i) {
+    getCell: function(z, i) {
       let len = _zsv_get_cell_len(z.zsv, i);
       if(len > 0) {
         if(!(z.cellbuffsize >= len + 1)) {
@@ -5073,6 +5066,6 @@ run();
         _free(z.cellbuff);
       return _zsv_delete(z.zsv);
     },
-    run_on_load
+    runOnLoad: run_on_load
   };
 })();
